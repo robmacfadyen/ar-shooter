@@ -18,6 +18,8 @@ public class Shoot : MonoBehaviour
     private Color normalColor;
     [SerializeField]
     private Color shootColor;
+    [SerializeField]
+    private Color reloadColor;
 
 
     [SerializeField]
@@ -54,8 +56,7 @@ public class Shoot : MonoBehaviour
     {
         bullets--;
 
-        // temporary method for displaying bullets, should change this to make the UI update itself
-        bulletsText.text = "Reload (" + bullets + ")";
+        UpdateBullets();
 
         // cast a ray from the crosshair
 
@@ -67,8 +68,15 @@ public class Shoot : MonoBehaviour
     public void Reload()
     {
         bullets = maxBullets;
-        crosshair.color = shootColor;
+        UpdateBullets();
+        crosshair.color = reloadColor;
         canShoot = false;
         Invoke("SetCanShoot", reloadTime);
+    }
+
+    private void UpdateBullets()
+    {
+        // temporary method for displaying bullets, should change this to make the UI update itself
+        bulletsText.text = "Reload (" + bullets + ")";
     }
 }
