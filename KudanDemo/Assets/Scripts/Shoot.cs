@@ -23,10 +23,18 @@ public class Shoot : MonoBehaviour
     [SerializeField]
     private Image crosshair;
 
+    [SerializeField]
+    private Text bulletsText;
+
     // Use this for initialization
+    void Start()
+    {
+        Reload();
+    }
+
     public void Trigger()
     {
-        if (canShoot)
+        if (canShoot && bullets > 0)
         {
             crosshair.color = shootColor;
             canShoot = false;
@@ -44,6 +52,11 @@ public class Shoot : MonoBehaviour
 
     private void ShootRay()
     {
+        bullets--;
+
+        // temporary method for displaying bullets, should change this to make the UI update itself
+        bulletsText.text = "Reload (" + bullets + ")";
+
         // cast a ray from the crosshair
 
         // return a list of targets hit
