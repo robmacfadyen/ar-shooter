@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class EnemyBehaviour : MonoBehaviour {
 
-    private float speed = 0.01f;
-    private float turn = 10f;
+    private float speed = 0.05f;
+    private float turn = 30f;
 
 	// Use this for initialization
     void Start()

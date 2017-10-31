@@ -6,11 +6,11 @@ public class Spinner : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		
+        Input.gyro.enabled = true;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-        this.transform.rotation *= Quaternion.AngleAxis(Time.deltaTime, Vector3.up);
+        this.transform.Rotate(0, -Input.gyro.rotationRateUnbiased.y, 0);
 	}
 }

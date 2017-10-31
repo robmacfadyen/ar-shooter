@@ -545,7 +545,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &580333108
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -615,7 +615,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 580333107}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -194, z: 1000}
+  m_LocalPosition: {x: 0, y: -265, z: 1000}
   m_LocalScale: {x: 100, y: 100, z: 100}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1105,7 +1105,7 @@ GameObject:
   - component: {fileID: 1354677367}
   - component: {fileID: 1354677366}
   m_Layer: 0
-  m_Name: Cylinder
+  m_Name: Spawner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1447,6 +1447,7 @@ GameObject:
   - component: {fileID: 1545655662}
   - component: {fileID: 1545655661}
   - component: {fileID: 1545655663}
+  - component: {fileID: 1545655664}
   m_Layer: 0
   m_Name: angelStatue
   m_TagString: Untagged
@@ -1519,6 +1520,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 221e2d826365a074ab25164c8522a012, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!64 &1545655664
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1545655659}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Convex: 0
+  m_InflateMesh: 0
+  m_SkinWidth: 0.01
+  m_Mesh: {fileID: 4300004, guid: 12b340d4f3cecea4c9012c4820f458ef, type: 3}
 --- !u!1 &1547200082
 GameObject:
   m_ObjectHideFlags: 0
