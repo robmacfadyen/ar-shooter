@@ -13,6 +13,12 @@ public class EnemyBehaviour : MonoBehaviour {
         // gameObject.SetActive(false);
     }
 
+    public void Spawn(Vector3 spawnPos, float spawnAngle)
+    {
+        this.transform.localPosition = spawnPos;
+        this.transform.localRotation = Quaternion.AngleAxis(spawnAngle, Vector3.up);
+    }
+
 	void OnEnable ()
     {
         

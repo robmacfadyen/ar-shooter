@@ -1,10 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class Shoot : MonoBehaviour
 {
+    [SerializeField]
+    private float damage = 20;
     private float bullets;
     [SerializeField]
     private float maxBullets = 20;
@@ -13,6 +16,9 @@ public class Shoot : MonoBehaviour
     [SerializeField]
     private float reloadTime = 1.5f;
     private bool canShoot = true;
+
+    [SerializeField]
+    private Camera camera;
 
     [SerializeField]
     private Color normalColor;
@@ -27,6 +33,9 @@ public class Shoot : MonoBehaviour
 
     [SerializeField]
     private Text bulletsText;
+
+    [SerializeField]
+    private Text debugText;
 
     // Use this for initialization
     void Start()
@@ -59,10 +68,27 @@ public class Shoot : MonoBehaviour
         UpdateBullets();
 
         // cast a ray from the crosshair
+        RaycastHit[] targets = Physics.RaycastAll(camera.ScreenPointToRay(new Vector2(Screen.width / 2, Screen.height / 2))).OrderBy(h => h.distance).ToArray();
 
-        // return a list of targets hit
-
-        // call Shot method on the first target
+        // check if the first hit is an enemy
+        if (targets.Length > 0)
+        {
+            GameObject firstTarget = targets[0].collider.gameObject;
+            if (firstTarget.GetComponent<HealthBehaviour>() != null)
+            {
+                // damage the target
+                firstTarget.GetComponent<HealthBehaviour>().Hit(damage);
+                debugText.text = "Hit an enemy";
+            }
+            else
+            {
+                debugText.text = "Hit a non-enemy";
+            }
+        }
+        else
+        {
+            debugText.text = "Hit nothing";
+        }
     }
 
     public void Reload()
