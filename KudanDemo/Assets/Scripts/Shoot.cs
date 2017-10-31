@@ -32,6 +32,13 @@ public class Shoot : MonoBehaviour
     private Image crosshair;
 
     [SerializeField]
+    private AudioSource shootSound;
+    [SerializeField]
+    private AudioSource dryFireSound;
+    [SerializeField]
+    private AudioSource reloadSound;
+
+    [SerializeField]
     private Text bulletsText;
 
     [SerializeField]
@@ -45,13 +52,21 @@ public class Shoot : MonoBehaviour
 
     public void Trigger()
     {
-        if (canShoot && bullets > 0)
+        if (canShoot)
         {
-            crosshair.color = shootColor;
-            canShoot = false;
-            Invoke("SetCanShoot", fireTime);
+            if (bullets > 0)
+            {
+                crosshair.color = shootColor;
+                canShoot = false;
+                Invoke("SetCanShoot", fireTime);
+                shootSound.Play();
 
-            ShootRay();
+                ShootRay();
+            }
+            else
+            {
+                dryFireSound.Play();
+            }
         }
     }
 
@@ -96,6 +111,7 @@ public class Shoot : MonoBehaviour
         bullets = maxBullets;
         UpdateBullets();
         crosshair.color = reloadColor;
+        reloadSound.Play();
         canShoot = false;
         Invoke("SetCanShoot", reloadTime);
     }
