@@ -64,7 +64,7 @@ public class SpawnerBehaviour : MonoBehaviour {
         {
             if (activeEnemies <= 0)
             {
-                this.gameObject.SetActive(false);
+                OnDisable();
             }
         }
 	}
