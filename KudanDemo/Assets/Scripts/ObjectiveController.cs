@@ -29,6 +29,8 @@ public class ObjectiveController : MonoBehaviour {
         {
             Die();
         }
+
+        Debug.Log(health);
     }
 
     public void Die()

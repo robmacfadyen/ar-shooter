@@ -23,6 +23,9 @@ public class EnemyController : MonoBehaviour {
     [SerializeField]
     private float preferredRange = 5f;
 
+    [SerializeField]
+    private BulletController bullet;
+
     private enum EnemyMode
     {
         SPAWNING,
@@ -119,7 +122,7 @@ public class EnemyController : MonoBehaviour {
 
     private void Shoot()
     {
-
+        bullet.ShootRay(damage, accuracy);
 
         Invoke("Shoot", 2f);
 
