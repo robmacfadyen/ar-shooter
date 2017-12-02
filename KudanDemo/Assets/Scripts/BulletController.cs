@@ -46,6 +46,16 @@ public class BulletController : MonoBehaviour {
                 //debugText.text = "Hit an enemy";
                 Debug.Log("Hit the objective");
             }
+            else if (firstTarget.GetComponent<BarrierController>() != null)
+            {
+                targetPosition = targets[0].point;
+                Invoke("GoToTarget", 0.05f);
+
+                // damage the target
+                firstTarget.GetComponent<BarrierController>().Hit(damage);
+                //debugText.text = "Hit an enemy";
+                Debug.Log("Hit a barrier");
+            }
             else
             {
                 //debugText.text = "Hit a non-enemy";
