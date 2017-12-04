@@ -21,6 +21,11 @@ public class PoolController : MonoBehaviour {
                 obj.SetActive(false);
                 obj.transform.parent = parent;
                 pool.Add(obj);
+
+                //if (obj.GetComponent<EnemyController>())
+                //{
+                //    obj.GetComponent<EnemyController>().MakeTarget();
+                //}
             }
             next = 0;
             max = number;
@@ -64,9 +69,9 @@ public class PoolController : MonoBehaviour {
     private List<Transform> parents;
 
 	// Use this for initialization
-	void Start () {
-        CreatePool();
-	}
+    //void Start () {
+    //    CreatePool();
+    //}
 	
 	// Update is called once per frame
 	void Update () {
@@ -86,7 +91,7 @@ public class PoolController : MonoBehaviour {
 
     public GameObject CreateObject(int poolIndex)
     {
-        return pools[poolIndex].CreateObject;
+        return pools[poolIndex].CreateObject();
     }
 
     public void DeletePool()

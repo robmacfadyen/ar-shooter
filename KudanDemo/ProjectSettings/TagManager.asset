@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Marker
   - Markerless
+  - Objective
   layers:
   - Default
   - TransparentFX

@@ -4,13 +4,19 @@ using UnityEngine;
 
 public class EnemyController : MonoBehaviour {
 
-    [SerializeField]
+    //[SerializeField]
     private Transform shootingTargetTransform;
     [SerializeField]
+    private GameObject movementTargetPrefab;
+    //[SerializeField]
     private Transform movementTargetTransform;
 
     [SerializeField]
     private float speed = 1f;
+
+    [SerializeField]
+    private float maxHealth = 100f;
+    private float health = 0;
 
 
     [Header("Weapon")]
@@ -26,6 +32,9 @@ public class EnemyController : MonoBehaviour {
     [SerializeField]
     private BulletController bullet;
 
+    [SerializeField]
+    private MeshRenderer mesh;
+
     private enum EnemyMode
     {
         SPAWNING,
@@ -36,9 +45,41 @@ public class EnemyController : MonoBehaviour {
     private EnemyMode mode = EnemyMode.SPAWNING;
 
 	// Use this for initialization
-	void Start () {
-        WalkTowardsTarget();
-	}
+    //void Start () {
+    //    Spawn();
+    //}
+
+    public void Init()
+    {
+        mode = EnemyMode.SPAWNING;
+
+        health = maxHealth;
+    }
+
+    void Awake()
+    {
+        movementTargetTransform = Instantiate(movementTargetPrefab).transform;
+
+        shootingTargetTransform = GameObject.FindGameObjectWithTag("Objective").transform;
+    }
+
+    public void MakeTarget()
+    {
+
+    }
+
+    void OnEnable()
+    {
+        if (mode == EnemyMode.ATTACKING)
+        {
+            Invoke("Shoot", Random.Range(0, fireRate));
+        }
+    }
+
+    void OnDisable()
+    {
+        CancelInvoke();
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -60,6 +101,29 @@ public class EnemyController : MonoBehaviour {
     }
 
     //##########################################################################################//
+    // Damage methods                                                                           //
+    //##########################################################################################//
+
+    public void Hit(float damage)
+    {
+        health -= damage;
+
+        if (health <= 0)
+        {
+            Die();
+        }
+
+        mesh.material.color = Color.Lerp(Color.red, Color.white, health / maxHealth);
+
+        Debug.Log(health);
+    }
+
+    public bool IsDead()
+    {
+        return (health <= 0);
+    }
+
+    //##########################################################################################//
     // Spawning methods                                                                         //
     //##########################################################################################//
 
@@ -74,6 +138,9 @@ public class EnemyController : MonoBehaviour {
 
     private void SetupPosition()
     {
+        movementTargetTransform.parent = transform.parent;
+        Debug.Log(transform.parent);
+
         transform.LookAt(shootingTargetTransform);
 
         movementTargetTransform.position = shootingTargetTransform.position + preferredRange * (Quaternion.AngleAxis(Random.Range(-15, 15), shootingTargetTransform.up) * -transform.forward);
@@ -112,21 +179,23 @@ public class EnemyController : MonoBehaviour {
     private void SetupAttack()
     {
         mode = EnemyMode.ATTACKING;
-        Invoke("Shoot", 2f);
+        Invoke("Shoot", fireRate);
     }
 
     private void Attack()
     {
-        transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(shootingTargetTransform.transform.position - transform.position), Time.deltaTime);
+        Quaternion currentRotation = transform.rotation;
+        transform.LookAt(shootingTargetTransform, shootingTargetTransform.up);
+        transform.rotation = Quaternion.Slerp(currentRotation, transform.rotation, Time.deltaTime);
     }
 
     private void Shoot()
     {
         bullet.ShootRay(damage, accuracy);
 
-        Invoke("Shoot", 2f);
+        Invoke("Shoot", fireRate);
 
-        Debug.Log("bang");
+        //Debug.Log("bang");
     }
 
     //##########################################################################################//
@@ -135,6 +204,6 @@ public class EnemyController : MonoBehaviour {
 
     private void Die()
     {
-
+        gameObject.SetActive(false);
     }
 }

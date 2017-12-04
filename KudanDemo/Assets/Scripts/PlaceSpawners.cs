@@ -72,7 +72,7 @@ public class PlaceSpawners : MonoBehaviour
     private void Start()
     {
         _kudanTracker.ChangeTrackingMethod(_markerlessTracking);
-        Invoke("PlaceSpawner", 5);
+        //Invoke("PlaceSpawner", 5);
     }
 
     void Update()

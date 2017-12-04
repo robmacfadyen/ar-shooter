@@ -50,6 +50,11 @@ public class Shoot : MonoBehaviour
         Reload();
     }
 
+    void Update()
+    {
+        crosshair.rectTransform.position = Input.mousePosition;
+    }
+
     public void Trigger()
     {
         if (canShoot)
@@ -83,7 +88,8 @@ public class Shoot : MonoBehaviour
         UpdateBullets();
 
         // cast a ray from the crosshair
-        RaycastHit[] targets = Physics.RaycastAll(camera.ScreenPointToRay(new Vector2(Screen.width / 2, Screen.height / 2))).OrderBy(h => h.distance).ToArray();
+        Debug.Log(crosshair.rectTransform.position);
+        RaycastHit[] targets = Physics.RaycastAll(camera.ScreenPointToRay(crosshair.rectTransform.position)).OrderBy(h => h.distance).ToArray();
 
         // check if the first hit is an enemy
         if (targets.Length > 0)
@@ -93,12 +99,19 @@ public class Shoot : MonoBehaviour
             {
                 // damage the target
                 firstTarget.GetComponent<HealthBehaviour>().Hit(damage);
-                debugText.text = "Hit an enemy";
+                debugText.text = "Hit an old enemy";
+            }
+            else if (firstTarget.GetComponent<EnemyController>() != null)
+            {
+                // damage the target
+                firstTarget.GetComponent<EnemyController>().Hit(damage);
+                debugText.text = "Hit a new enemy";
             }
             else
             {
                 debugText.text = "Hit a non-enemy";
             }
+            debugText.text = "Hit" + firstTarget.ToString();
         }
         else
         {
