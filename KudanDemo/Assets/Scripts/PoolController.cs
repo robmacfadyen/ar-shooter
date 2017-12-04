@@ -20,6 +20,7 @@ public class PoolController : MonoBehaviour {
                 GameObject obj = Instantiate(prefab);
                 obj.SetActive(false);
                 obj.transform.parent = parent;
+                obj.transform.localScale = Vector3.one;
                 pool.Add(obj);
 
                 //if (obj.GetComponent<EnemyController>())

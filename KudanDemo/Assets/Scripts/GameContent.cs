@@ -36,14 +36,19 @@ public class GameContent : MonoBehaviour {
 
 	// Use this for initialization
 	void OnEnable() {
-        debugText.text = "Enabled";
+        //debugText.text += "Enabled";
+        Init();
+	}
+
+    public void Init()
+    {
         if (!active)
         {
             CreatePlayField();
 
             SpawnCycle();
         }
-	}
+    }
 
     //void OnDisable()
     //{
@@ -90,10 +95,10 @@ public class GameContent : MonoBehaviour {
             GameObject obj = pool.CreateObject(0); // create a barrier
             obj.transform.localRotation = Quaternion.AngleAxis(i * 45f, Vector3.up);
             obj.transform.localPosition = Vector3.zero;
-            obj.transform.Translate(Vector3.forward * 2.4f);
+            obj.transform.Translate(Vector3.forward * 2.4f * obj.transform.lossyScale.x);
             obj.GetComponent<BarrierController>().Build(100f);
 
-            debugText.text = obj.ToString();
+            //debugText.text = obj.ToString();
         }
 
         for (int i = 0; i < 12; i++)
@@ -102,10 +107,10 @@ public class GameContent : MonoBehaviour {
             GameObject obj = pool.CreateObject(0); // create a barrier
             obj.transform.localRotation = Quaternion.AngleAxis(i * 30f, Vector3.up);
             obj.transform.localPosition = Vector3.zero;
-            obj.transform.Translate(Vector3.forward * 3.6f);
+            obj.transform.Translate(Vector3.forward * 3.6f * obj.transform.lossyScale.x);
             obj.GetComponent<BarrierController>().Build(100f);
 
-            debugText.text = obj.ToString();
+            //debugText.text = obj.ToString();
         }
 
         for (int i = 0; i < 16; i++)
@@ -114,10 +119,10 @@ public class GameContent : MonoBehaviour {
             GameObject obj = pool.CreateObject(0); // create a barrier
             obj.transform.localRotation = Quaternion.AngleAxis(i * 22.5f, Vector3.up);
             obj.transform.localPosition = Vector3.zero;
-            obj.transform.Translate(Vector3.forward * 4.8f);
+            obj.transform.Translate(Vector3.forward * 4.8f * obj.transform.lossyScale.x);
             obj.GetComponent<BarrierController>().Build(100f);
 
-            debugText.text = obj.ToString();
+            //debugText.text = obj.transform.localPosition.ToString();
         }
 
         active = true;
@@ -137,7 +142,7 @@ public class GameContent : MonoBehaviour {
             {
                 obj.transform.localRotation = Quaternion.AngleAxis(angle, Vector3.up);
                 obj.transform.localPosition = Vector3.zero;
-                obj.transform.Translate(Vector3.forward * distance);
+                obj.transform.Translate(Vector3.forward * distance * obj.transform.lossyScale.x);
                 obj.transform.localPosition += new Vector3(Random.Range(-spread, spread), 0, Random.Range(-spread, spread));
 
                 obj.GetComponent<EnemyController>().Init();

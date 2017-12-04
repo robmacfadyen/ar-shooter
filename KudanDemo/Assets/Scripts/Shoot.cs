@@ -104,23 +104,17 @@ public class Shoot : MonoBehaviour
             {
                 // damage the target
                 firstTarget.GetComponent<HealthBehaviour>().Hit(damage);
-                debugText.text = "Hit an old enemy";
             }
             else if (firstTarget.GetComponent<EnemyController>() != null)
             {
                 // damage the target
                 firstTarget.GetComponent<EnemyController>().Hit(damage);
-                debugText.text = "Hit a new enemy";
             }
-            else
-            {
-                debugText.text = "Hit a non-enemy";
-            }
-            debugText.text = "Hit" + firstTarget.ToString();
+            //debugText.text = "Hit " + firstTarget.ToString();
         }
         else
         {
-            debugText.text = "Hit nothing";
+            //debugText.text = "Hit nothing";
         }
     }
 

@@ -147,7 +147,7 @@ public class EnemyController : MonoBehaviour {
 
         transform.LookAt(shootingTargetTransform);
 
-        movementTargetTransform.position = shootingTargetTransform.position + preferredRange * (Quaternion.AngleAxis(Random.Range(-15, 15), shootingTargetTransform.up) * -transform.forward);
+        movementTargetTransform.position = shootingTargetTransform.position + preferredRange * (Quaternion.AngleAxis(Random.Range(-25, 25), shootingTargetTransform.up) * -transform.forward);
 
         mode = EnemyMode.POSITIONING;
     }

@@ -17,6 +17,8 @@ public class PlaceSpawners : MonoBehaviour
     private int spawnersPlaced = 1;
     private int spawnersKilled = 0;
 
+    public GameContent gameContent;
+
     public void MarkerClicked()
     {
         _kudanTracker.ChangeTrackingMethod(_markerTracking);	// Change the current tracking method to marker tracking
@@ -38,6 +40,8 @@ public class PlaceSpawners : MonoBehaviour
             _kudanTracker.FloorPlaceGetPose(out floorPosition, out floorOrientation);   // Gets the position and orientation of the floor and assigns the referenced Vector3 and Quaternion those values
             _kudanTracker.ArbiTrackStart(floorPosition, floorOrientation);              // Starts markerless tracking based upon the given floor position and orientations
             spawnersPlaced++;
+
+            gameContent.Init();
         }
 
         else
