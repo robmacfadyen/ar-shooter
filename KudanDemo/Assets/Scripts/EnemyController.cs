@@ -35,6 +35,8 @@ public class EnemyController : MonoBehaviour {
     [SerializeField]
     private MeshRenderer mesh;
 
+    private GameContent game;
+
     private enum EnemyMode
     {
         SPAWNING,
@@ -54,6 +56,8 @@ public class EnemyController : MonoBehaviour {
         mode = EnemyMode.SPAWNING;
 
         health = maxHealth;
+
+        game = GetComponentInParent<GameContent>();
     }
 
     void Awake()

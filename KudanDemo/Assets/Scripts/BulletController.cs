@@ -44,7 +44,7 @@ public class BulletController : MonoBehaviour {
                 // damage the target
                 firstTarget.GetComponent<ObjectiveController>().Hit(damage);
                 //debugText.text = "Hit an enemy";
-                Debug.Log("Hit the objective");
+                //Debug.Log("Hit the objective");
             }
             else if (firstTarget.GetComponent<BarrierController>() != null)
             {
@@ -54,18 +54,18 @@ public class BulletController : MonoBehaviour {
                 // damage the target
                 firstTarget.GetComponent<BarrierController>().Hit(damage);
                 //debugText.text = "Hit an enemy";
-                Debug.Log("Hit a barrier");
+                //Debug.Log("Hit a barrier");
             }
             else
             {
                 //debugText.text = "Hit a non-enemy";
-                Debug.Log("Hit something else");
+                //Debug.Log("Hit something else");
             }
         }
         else
         {
             //debugText.text = "Hit nothing";
-            Debug.Log("Hit nothing");
+            //Debug.Log("Hit nothing");
         }
     }
 

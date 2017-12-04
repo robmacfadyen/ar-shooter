@@ -20,6 +20,8 @@ public class GameContent : MonoBehaviour {
     private int minWaveSize = 2;
     [SerializeField]
     private int maxWaveSize = 6;
+    [SerializeField]
+    private float maxTimeBetweenWaves = 15f;
 
     [SerializeField]
     private Text debugText;
@@ -28,6 +30,7 @@ public class GameContent : MonoBehaviour {
     private PlaceSpawners placeSpawners;
 
     private bool active = false;
+    private float enemies = 0;
 
 	// Use this for initialization
 	void OnEnable() {
@@ -36,7 +39,7 @@ public class GameContent : MonoBehaviour {
         {
             CreatePlayField();
 
-            SpawnEnemies(120f, 8f, 1f, 4);
+            SpawnCycle();
         }
 	}
 
@@ -55,8 +58,23 @@ public class GameContent : MonoBehaviour {
                 //placeSpawners.KillSpawner();
                 debugText.text = "Objective is dead";
             }
+
+            if (enemies < minWaveSize)
+            {
+                CancelInvoke("SpawnCycle");
+                SpawnCycle();
+            }
         }
 	}
+
+    void SpawnCycle()
+    {
+        int numberToSpawn = Random.Range(minWaveSize, maxWaveSize + 1);
+        SpawnEnemies(Random.Range(0f, 360f), Random.Range(7f, 9f), 1f, numberToSpawn);
+        minWaveSize++;
+        maxWaveSize++;
+        Invoke("SpawnCycle", maxTimeBetweenWaves);
+    }
 
     void CreatePlayField()
     {
@@ -121,7 +139,14 @@ public class GameContent : MonoBehaviour {
                 obj.transform.localPosition += new Vector3(Random.Range(-spread, spread), 0, Random.Range(-spread, spread));
 
                 obj.GetComponent<EnemyController>().Init();
+
+                enemies++;
             }
         }
+    }
+
+    public void KillEnemy()
+    {
+        enemies--;
     }
 }
