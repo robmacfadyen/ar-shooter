@@ -21,6 +21,8 @@ public class GameContent : MonoBehaviour {
     [SerializeField]
     private int maxWaveSize = 6;
     [SerializeField]
+    private int minEnemiesOnScreen = 2;
+    [SerializeField]
     private float maxTimeBetweenWaves = 15f;
 
     [SerializeField]
@@ -59,7 +61,7 @@ public class GameContent : MonoBehaviour {
                 debugText.text = "Objective is dead";
             }
 
-            if (enemies < minWaveSize)
+            if (enemies < minEnemiesOnScreen)
             {
                 CancelInvoke("SpawnCycle");
                 SpawnCycle();

@@ -79,6 +79,11 @@ public class Shoot : MonoBehaviour
     {
         crosshair.color = normalColor;
         canShoot = true;
+
+        if (bullets <= 0)
+        {
+            Reload();
+        }
     }
 
     private void ShootRay()

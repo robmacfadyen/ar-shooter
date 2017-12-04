@@ -208,6 +208,7 @@ public class EnemyController : MonoBehaviour {
 
     private void Die()
     {
+        game.KillEnemy();
         gameObject.SetActive(false);
     }
 }
