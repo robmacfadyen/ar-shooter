@@ -48,7 +48,7 @@ public class BarrierController : MonoBehaviour {
             Die();
         }
 
-        mesh.material.color = Color.Lerp(new Color(192, 0, 0), new Color(192, 192, 192), health / maxHealth);
+        mesh.material.color = Color.Lerp(Color.red, Color.white, health / maxHealth);
 
         //Debug.Log(health);
     }

@@ -24,7 +24,7 @@ public class EnemyController : MonoBehaviour {
     [SerializeField]
     private float fireRate = 1f;
     [SerializeField]
-    private float damage = 1f;
+    private float damage = 2f;
     [SerializeField]
     private float accuracy = 1f;
     [SerializeField]

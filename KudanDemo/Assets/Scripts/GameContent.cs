@@ -102,7 +102,7 @@ public class GameContent : MonoBehaviour {
             obj.transform.localRotation = Quaternion.AngleAxis(i * 45f, Vector3.up);
             obj.transform.localPosition = Vector3.zero;
             obj.transform.Translate(Vector3.forward * 2.4f * obj.transform.lossyScale.x);
-            obj.GetComponent<BarrierController>().Build(150f);
+            obj.GetComponent<BarrierController>().Build(100f);
 
             //debugText.text = obj.ToString();
         }
@@ -114,7 +114,7 @@ public class GameContent : MonoBehaviour {
             obj.transform.localRotation = Quaternion.AngleAxis(i * 30f, Vector3.up);
             obj.transform.localPosition = Vector3.zero;
             obj.transform.Translate(Vector3.forward * 3.6f * obj.transform.lossyScale.x);
-            obj.GetComponent<BarrierController>().Build(150f);
+            obj.GetComponent<BarrierController>().Build(100f);
 
             //debugText.text = obj.ToString();
         }
@@ -126,7 +126,7 @@ public class GameContent : MonoBehaviour {
             obj.transform.localRotation = Quaternion.AngleAxis(i * 22.5f, Vector3.up);
             obj.transform.localPosition = Vector3.zero;
             obj.transform.Translate(Vector3.forward * 4.8f * obj.transform.lossyScale.x);
-            obj.GetComponent<BarrierController>().Build(150f);
+            obj.GetComponent<BarrierController>().Build(100f);
 
             //debugText.text = obj.transform.localPosition.ToString();
         }
