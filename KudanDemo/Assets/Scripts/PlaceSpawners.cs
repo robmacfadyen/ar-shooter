@@ -13,9 +13,23 @@ public class PlaceSpawners : MonoBehaviour
     public TrackingMethodMarkerless _markerlessTracking;    // The reference to the markerless tracking method that lets the tracker know which method it is using
 
     public Text buttonText;
+    public Button startButton;
+
+    public GameObject winScreen;
+    public GameObject loseScreen;
 
     private int spawnersPlaced = 1;
     private int spawnersKilled = 0;
+
+    private enum GameState
+    {
+        READY,
+        PLAYING,
+        PAUSED,
+        WON,
+        LOST
+    }
+    private GameState state;
 
     public GameContent gameContent;
 
@@ -42,12 +56,14 @@ public class PlaceSpawners : MonoBehaviour
             spawnersPlaced++;
 
             gameContent.Init();
+
+
         }
 
-        else
-        {
-            _kudanTracker.ArbiTrackStop();
-        }
+        //else
+        //{
+        //    _kudanTracker.ArbiTrackStop();
+        //}
     }
 
     public void KillSpawner()
@@ -69,13 +85,14 @@ public class PlaceSpawners : MonoBehaviour
 
             _kudanTracker.FloorPlaceGetPose(out floorPosition, out floorOrientation);   // Gets the position and orientation of the floor and assigns the referenced Vector3 and Quaternion those values
             _kudanTracker.ArbiTrackStart(floorPosition, floorOrientation);              // Starts markerless tracking based upon the given floor position and orientations
-            spawnersPlaced++;
+            state = GameState.PLAYING;
         }
     }
 
     private void Start()
     {
         _kudanTracker.ChangeTrackingMethod(_markerlessTracking);
+        state = GameState.READY;
         //Invoke("PlaceSpawner", 5);
     }
 
@@ -88,26 +105,48 @@ public class PlaceSpawners : MonoBehaviour
             //{
             //    spawnersKilled++;
             //    Invoke("checkIfSpawnerIsDead", 1);
-                buttonText.text = "Spawn";
+            if (state = GameState.PLAYING)
+            {
+                startButton.gameObject.SetActive(true);
+                buttonText.text = "Lost the target! Find a clear space on the ground, and tap to resume";
+                state = GameState.PAUSED;
+            }
             //}
         }
         else
         {
-            buttonText.text = "Active";
+            startButton.gameObject.SetActive(false);
+            //buttonText.text = "Active";
         }
     }
 
-    private void checkIfSpawnerIsDead()
+    public void Win()
     {
-        if (!_kudanTracker.ArbiTrackIsTracking())
-        {
-            Invoke("PlaceSpawner", 5);
-            buttonText.text = "respawned";
-        }
-        else
-        {
-            spawnersKilled--;
-            buttonText.text = "not respawned";
-        }
+        state = GameState.WON;
+        _kudanTracker.ArbiTrackStop();
+        winScreen.SetActive(true);
+        Time.timeScale = 0;
     }
+
+    public void Lose()
+    {
+        state = GameState.LOST;
+        _kudanTracker.ArbiTrackStop();
+        loseScreen.SetActive(true);
+        Time.timeScale = 0;
+    }
+
+    //private void checkIfSpawnerIsDead()
+    //{
+    //    if (!_kudanTracker.ArbiTrackIsTracking())
+    //    {
+    //        Invoke("PlaceSpawner", 5);
+    //        buttonText.text = "respawned";
+    //    }
+    //    else
+    //    {
+    //        spawnersKilled--;
+    //        buttonText.text = "not respawned";
+    //    }
+    //}
 }

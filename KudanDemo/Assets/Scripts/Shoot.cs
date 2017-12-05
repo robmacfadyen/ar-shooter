@@ -52,7 +52,7 @@ public class Shoot : MonoBehaviour
 
     void Update()
     {
-        crosshair.rectTransform.position = Input.mousePosition;
+        //crosshair.rectTransform.position = Input.mousePosition;
     }
 
     public void Trigger()

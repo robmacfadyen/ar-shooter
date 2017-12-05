@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class EnemyController : MonoBehaviour {
 
@@ -102,6 +103,8 @@ public class EnemyController : MonoBehaviour {
                 Die();
                 break;
         }
+
+        game.debugText.text = "enemy updated" + Time.time;
     }
 
     //##########################################################################################//
@@ -147,7 +150,7 @@ public class EnemyController : MonoBehaviour {
 
         transform.LookAt(shootingTargetTransform);
 
-        movementTargetTransform.position = shootingTargetTransform.position + preferredRange * (Quaternion.AngleAxis(Random.Range(-25, 25), shootingTargetTransform.up) * -transform.forward);
+        movementTargetTransform.position = shootingTargetTransform.position + preferredRange * (Quaternion.AngleAxis(Random.Range(-25, 25), shootingTargetTransform.up) * -transform.forward * shootingTargetTransform.transform.lossyScale.x);
 
         mode = EnemyMode.POSITIONING;
     }
@@ -156,7 +159,7 @@ public class EnemyController : MonoBehaviour {
     {
         WalkTowardsTarget();
 
-        if (Vector3.Distance(transform.position, movementTargetTransform.position) < speed * Time.deltaTime)
+        if (Vector3.Distance(transform.position, movementTargetTransform.position) < speed * transform.lossyScale.x * Time.deltaTime)
         {
             SetupAttack();
         }
@@ -166,13 +169,13 @@ public class EnemyController : MonoBehaviour {
     {
         transform.LookAt(movementTargetTransform, shootingTargetTransform.up);
 
-        if (Vector3.Distance(transform.position, movementTargetTransform.position) < speed * Time.deltaTime)
+        if (Vector3.Distance(transform.position, movementTargetTransform.position) < speed * transform.lossyScale.x * Time.deltaTime)
         {
             transform.position = movementTargetTransform.position;
         }
         else
         {
-            transform.Translate(Vector3.forward * speed * Time.deltaTime);
+            transform.Translate(Vector3.forward * speed * transform.lossyScale.x * Time.deltaTime);
         }
     }
 

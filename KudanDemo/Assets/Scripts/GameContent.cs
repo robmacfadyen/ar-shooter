@@ -26,7 +26,7 @@ public class GameContent : MonoBehaviour {
     private float maxTimeBetweenWaves = 15f;
 
     [SerializeField]
-    private Text debugText;
+    public Text debugText;
 
     [SerializeField]
     private PlaceSpawners placeSpawners;
@@ -61,9 +61,15 @@ public class GameContent : MonoBehaviour {
         {
             if (objective.IsDead())
             {
-                //DestroyPlayField();
-                //placeSpawners.KillSpawner();
+                DestroyPlayField();
+                placeSpawners.Lose();
                 debugText.text = "Objective is dead";
+            }
+
+            if (objective.IsBuilt())
+            {
+                DestroyPlayField();
+                placeSpawners.Win();
             }
 
             if (enemies < minEnemiesOnScreen)
@@ -85,7 +91,7 @@ public class GameContent : MonoBehaviour {
 
     void CreatePlayField()
     {
-        objective.Build(1000f, 180f);
+        objective.Build(1000f, 30f);
 
         pool.CreatePool();
 
@@ -96,7 +102,7 @@ public class GameContent : MonoBehaviour {
             obj.transform.localRotation = Quaternion.AngleAxis(i * 45f, Vector3.up);
             obj.transform.localPosition = Vector3.zero;
             obj.transform.Translate(Vector3.forward * 2.4f * obj.transform.lossyScale.x);
-            obj.GetComponent<BarrierController>().Build(100f);
+            obj.GetComponent<BarrierController>().Build(150f);
 
             //debugText.text = obj.ToString();
         }
@@ -108,7 +114,7 @@ public class GameContent : MonoBehaviour {
             obj.transform.localRotation = Quaternion.AngleAxis(i * 30f, Vector3.up);
             obj.transform.localPosition = Vector3.zero;
             obj.transform.Translate(Vector3.forward * 3.6f * obj.transform.lossyScale.x);
-            obj.GetComponent<BarrierController>().Build(100f);
+            obj.GetComponent<BarrierController>().Build(150f);
 
             //debugText.text = obj.ToString();
         }
@@ -120,7 +126,7 @@ public class GameContent : MonoBehaviour {
             obj.transform.localRotation = Quaternion.AngleAxis(i * 22.5f, Vector3.up);
             obj.transform.localPosition = Vector3.zero;
             obj.transform.Translate(Vector3.forward * 4.8f * obj.transform.lossyScale.x);
-            obj.GetComponent<BarrierController>().Build(100f);
+            obj.GetComponent<BarrierController>().Build(150f);
 
             //debugText.text = obj.transform.localPosition.ToString();
         }
