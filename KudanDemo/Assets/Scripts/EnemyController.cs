@@ -104,7 +104,7 @@ public class EnemyController : MonoBehaviour {
                 break;
         }
 
-        game.debugText.text = "enemy updated" + Time.time;
+        //game.debugText.text = "enemy updated" + Time.time;
     }
 
     //##########################################################################################//

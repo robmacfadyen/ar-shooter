@@ -14,6 +14,7 @@ public class PlaceSpawners : MonoBehaviour
 
     public Text buttonText;
     public Button startButton;
+    public Text debugText;
 
     public GameObject winScreen;
     public GameObject loseScreen;
@@ -56,8 +57,6 @@ public class PlaceSpawners : MonoBehaviour
             spawnersPlaced++;
 
             gameContent.Init();
-
-
         }
 
         //else
@@ -75,19 +74,19 @@ public class PlaceSpawners : MonoBehaviour
         }
     }
 
-    public void PlaceSpawner()
-    {
-        if (!_kudanTracker.ArbiTrackIsTracking())
-        {
-            // from the floor placer.
-            Vector3 floorPosition;          // The current position in 3D space of the floor
-            Quaternion floorOrientation;    // The current orientation of the floor in 3D space, relative to the device
+    //public void PlaceSpawner()
+    //{
+    //    if (!_kudanTracker.ArbiTrackIsTracking())
+    //    {
+    //        // from the floor placer.
+    //        Vector3 floorPosition;          // The current position in 3D space of the floor
+    //        Quaternion floorOrientation;    // The current orientation of the floor in 3D space, relative to the device
 
-            _kudanTracker.FloorPlaceGetPose(out floorPosition, out floorOrientation);   // Gets the position and orientation of the floor and assigns the referenced Vector3 and Quaternion those values
-            _kudanTracker.ArbiTrackStart(floorPosition, floorOrientation);              // Starts markerless tracking based upon the given floor position and orientations
-            state = GameState.PLAYING;
-        }
-    }
+    //        _kudanTracker.FloorPlaceGetPose(out floorPosition, out floorOrientation);   // Gets the position and orientation of the floor and assigns the referenced Vector3 and Quaternion those values
+    //        _kudanTracker.ArbiTrackStart(floorPosition, floorOrientation);              // Starts markerless tracking based upon the given floor position and orientations
+    //        state = GameState.PLAYING;
+    //    }
+    //}
 
     private void Start()
     {
@@ -105,7 +104,7 @@ public class PlaceSpawners : MonoBehaviour
             //{
             //    spawnersKilled++;
             //    Invoke("checkIfSpawnerIsDead", 1);
-            if (state = GameState.PLAYING)
+            if (state == GameState.PLAYING)
             {
                 startButton.gameObject.SetActive(true);
                 buttonText.text = "Lost the target! Find a clear space on the ground, and tap to resume";
@@ -117,7 +116,10 @@ public class PlaceSpawners : MonoBehaviour
         {
             startButton.gameObject.SetActive(false);
             //buttonText.text = "Active";
+            state = GameState.PLAYING;
         }
+
+        debugText.text = state.ToString();
     }
 
     public void Win()

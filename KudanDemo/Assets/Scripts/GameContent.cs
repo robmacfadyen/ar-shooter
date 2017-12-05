@@ -91,7 +91,7 @@ public class GameContent : MonoBehaviour {
 
     void CreatePlayField()
     {
-        objective.Build(1000f, 30f);
+        objective.Build(1000f, 150f);
 
         pool.CreatePool();
 
