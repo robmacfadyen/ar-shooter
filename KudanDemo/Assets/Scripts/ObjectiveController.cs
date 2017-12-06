@@ -58,7 +58,9 @@ public class ObjectiveController : MonoBehaviour {
 
         mesh.material.color = Color.Lerp(Color.red, Color.white, health / maxHealth);
 
-        //Debug.Log(health);
+        Debug.Log(health);
+
+        healthBar.value = health;
     }
 
     public void Die()

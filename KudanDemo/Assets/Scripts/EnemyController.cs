@@ -59,6 +59,8 @@ public class EnemyController : MonoBehaviour {
         health = maxHealth;
 
         game = GetComponentInParent<GameContent>();
+
+        mesh.material.color = Color.white;
     }
 
     void Awake()
@@ -210,6 +212,12 @@ public class EnemyController : MonoBehaviour {
     //##########################################################################################//
 
     private void Die()
+    {
+        mesh.material.color = Color.red;
+        Invoke("Despawn", 0.5f);
+    }
+
+    private void Despawn()
     {
         game.KillEnemy();
         gameObject.SetActive(false);

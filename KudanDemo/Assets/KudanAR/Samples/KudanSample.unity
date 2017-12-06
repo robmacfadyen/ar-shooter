@@ -1405,9 +1405,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77f9cdb041461f447b6f89a57f85182c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 20
-  maxBullets: 20
-  fireTime: 0.5
+  damage: 1000
+  maxBullets: 8
+  fireTime: 1
   reloadTime: 1.5
   camera: {fileID: 854794290}
   normalColor: {r: 1, g: 1, b: 1, a: 1}
