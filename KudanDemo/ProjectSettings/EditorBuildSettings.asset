@@ -8,9 +8,12 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/Title.unity
     guid: b2e45ec4c1bfd404288736e3cf6bd719
-  - enabled: 1
+  - enabled: 0
     path: Assets/KudanAR/Samples/KudanSample.unity
     guid: 4a7f9b1564931324b8958c2cf553b965
   - enabled: 0
     path: Assets/Scenes/Defend.unity
     guid: 6a12229261dc464429a6aae513c79573
+  - enabled: 1
+    path: Assets/Mapbox/Examples/SlippyTerrain/Slippy.unity
+    guid: efcdf81fdae9ef1478b04b31da5816d5
