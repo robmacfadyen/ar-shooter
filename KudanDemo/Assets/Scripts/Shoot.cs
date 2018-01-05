@@ -30,6 +30,8 @@ public class Shoot : MonoBehaviour
 
     [SerializeField]
     private Image crosshair;
+    [SerializeField]
+    private GameObject flashPanel;
 
     [SerializeField]
     private AudioSource shootSound;
@@ -62,6 +64,7 @@ public class Shoot : MonoBehaviour
             if (bullets > 0)
             {
                 crosshair.color = shootColor;
+                flashPanel.SetActive(true);
                 canShoot = false;
                 Invoke("SetCanShoot", fireTime);
                 shootSound.Play();
@@ -78,6 +81,7 @@ public class Shoot : MonoBehaviour
     private void SetCanShoot()
     {
         crosshair.color = normalColor;
+        flashPanel.SetActive(false);
         canShoot = true;
 
         if (bullets <= 0)

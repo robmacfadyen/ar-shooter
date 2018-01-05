@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657886, g: 0.4964127, b: 0.57481724, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -1177,27 +1177,6 @@ Prefab:
       propertyPath: buildBar
       value: 
       objectReference: {fileID: 2053919138}
-    - target: {fileID: 1748317366149138, guid: 63c8da719596b484d9cfe97c7afdebfb, type: 2}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4916573600768534, guid: 63c8da719596b484d9cfe97c7afdebfb, type: 2}
-      propertyPath: m_LocalScale.x
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 4916573600768534, guid: 63c8da719596b484d9cfe97c7afdebfb, type: 2}
-      propertyPath: m_LocalScale.y
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 4916573600768534, guid: 63c8da719596b484d9cfe97c7afdebfb, type: 2}
-      propertyPath: m_LocalScale.z
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 114689811427274078, guid: 63c8da719596b484d9cfe97c7afdebfb,
-        type: 2}
-      propertyPath: maxHealth
-      value: 100
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 63c8da719596b484d9cfe97c7afdebfb, type: 2}
   m_IsPrefabParent: 0

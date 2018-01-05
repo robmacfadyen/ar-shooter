@@ -3,6 +3,7 @@
 	using Mapbox.Unity.Utilities;
 	using Utils;
 	using Mapbox.Map;
+    using UnityEngine;
 
 	public class BasicMap : AbstractMap
 	{
@@ -20,6 +21,14 @@
 			_tileProvider.Initialize(this);
 
 			SendInitialized();
+            ShowBases();
 		}
+
+        void ShowBases()
+        {
+            GPS gps = GameObject.Find("Canvas").GetComponent<GPS>();
+            gps.ShowBases();
+            Debug.Log("initialized");
+        }
 	}
 }

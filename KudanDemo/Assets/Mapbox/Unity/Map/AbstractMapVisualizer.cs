@@ -90,18 +90,18 @@
 			// Cleanup gameobjects and clear lists!
 			// This scriptable object may be re-used, but it's gameobjects are likely 
 			// to be destroyed by a scene change, for example. 
-			foreach (var tile in _activeTiles.Values.ToList())
-			{
-				Destroy(tile.gameObject);
-			}
-
-			foreach (var tile in _inactiveTiles)
-			{
+            foreach (var tile in _activeTiles.Values.ToList())
+            {
                 Destroy(tile.gameObject);
-			}
+            }
 
-			_activeTiles.Clear();
-			_inactiveTiles.Clear();
+            foreach (var tile in _inactiveTiles)
+            {
+                Destroy(tile.gameObject);
+            }
+
+            _activeTiles.Clear();
+            _inactiveTiles.Clear();
 		}
 
 		internal void UpdateState(AbstractTileFactory factory)

@@ -60,7 +60,7 @@ public class EnemyController : MonoBehaviour {
 
         game = GetComponentInParent<GameContent>();
 
-        mesh.material.color = Color.white;
+        mesh.material.color = new Color(125f / 255f, 21f / 255f, 15f / 255f);
     }
 
     void Awake()
@@ -122,7 +122,7 @@ public class EnemyController : MonoBehaviour {
             Die();
         }
 
-        mesh.material.color = Color.Lerp(Color.red, Color.white, health / maxHealth);
+        //mesh.material.color = Color.Lerp(Color.red, Color.white, health / maxHealth);
 
         Debug.Log(health);
     }
@@ -213,7 +213,7 @@ public class EnemyController : MonoBehaviour {
 
     private void Die()
     {
-        mesh.material.color = Color.red;
+        mesh.material.color = Color.black;
         Invoke("Despawn", 0.5f);
     }
 

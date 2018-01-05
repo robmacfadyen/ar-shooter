@@ -20,6 +20,12 @@ public class ObjectiveController : MonoBehaviour {
 
     [SerializeField]
     private MeshRenderer mesh;
+    [SerializeField]
+    private Transform helix1;
+    [SerializeField]
+    private Transform helix2;
+
+    private SceneLoader sceneLoader;
 
 	// Use this for initialization
 	void Start () {
@@ -30,6 +36,9 @@ public class ObjectiveController : MonoBehaviour {
 	void Update () {
         builtTime += Time.deltaTime;
         buildBar.value = builtTime;
+
+        helix1.Rotate(Vector3.forward, 360 * Time.deltaTime);
+        helix2.Rotate(Vector3.forward, -180 * Time.deltaTime);
 	}
 
     public void Build(float startingHealth, float timeToBuild)

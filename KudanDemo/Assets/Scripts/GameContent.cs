@@ -27,6 +27,8 @@ public class GameContent : MonoBehaviour {
 
     [SerializeField]
     public Text debugText;
+    [SerializeField]
+    public Text scoreText;
 
     [SerializeField]
     private PlaceSpawners placeSpawners;
@@ -34,20 +36,31 @@ public class GameContent : MonoBehaviour {
     private bool active = false;
     private float enemies = 0;
 
+    private SceneLoader sceneLoader;
+    private int level = -1;
+
 	// Use this for initialization
 	void OnEnable() {
-        //debugText.text += "Enabled";
+        debugText.text += "Enabled";
         Init();
 	}
 
     public void Init()
     {
+        scoreText.text = "Score 0";
+
+        sceneLoader = GameObject.Find("SceneController").GetComponent<SceneLoader>();
+        level = sceneLoader.bases[sceneLoader.activeBase].lvl;
+        debugText.text = level.ToString();
+
         if (!active)
         {
             CreatePlayField();
 
             SpawnCycle();
         }
+
+        Invoke("ForceWin", 1);
     }
 
     //void OnDisable()
@@ -57,10 +70,15 @@ public class GameContent : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update() {
+        //DestroyPlayField();
+        //sceneLoader.EndGame(sceneLoader.roundScore, true);
+        //placeSpawners.Win();
+
         if (active)
         {
             if (objective.IsDead())
             {
+                CancelInvoke();
                 DestroyPlayField();
                 placeSpawners.Lose();
                 debugText.text = "Objective is dead";
@@ -68,6 +86,7 @@ public class GameContent : MonoBehaviour {
 
             if (objective.IsBuilt())
             {
+                CancelInvoke();
                 DestroyPlayField();
                 placeSpawners.Win();
             }
@@ -80,18 +99,25 @@ public class GameContent : MonoBehaviour {
         }
 	}
 
+    void ForceWin()
+    {
+        CancelInvoke();
+        DestroyPlayField();
+        placeSpawners.Win();
+    }
+
     void SpawnCycle()
     {
-        int numberToSpawn = Random.Range(minWaveSize, maxWaveSize + 1);
-        SpawnEnemies(Random.Range(0f, 360f), Random.Range(7f, 9f), 1f, numberToSpawn);
+        int numberToSpawn = (int) (Random.Range(minWaveSize, maxWaveSize + 1) / 3);
+        SpawnEnemies(Random.Range(0f, 360f), Random.Range(7f, 9f), 3f, numberToSpawn);
         minWaveSize++;
         maxWaveSize++;
-        Invoke("SpawnCycle", maxTimeBetweenWaves);
+        Invoke("SpawnCycle", maxTimeBetweenWaves / 2);
     }
 
     void CreatePlayField()
     {
-        objective.Build(800f, 150f);
+        objective.Build(800f, 1f + 30f * level);
 
         pool.CreatePool();
 
@@ -146,7 +172,7 @@ public class GameContent : MonoBehaviour {
             GameObject obj = pool.CreateObject(1); // create an enemy
             if (obj)
             {
-                obj.transform.localRotation = Quaternion.AngleAxis(angle, Vector3.up);
+                obj.transform.localRotation = Quaternion.AngleAxis(angle + Random.Range(-40f, 40f), Vector3.up);
                 obj.transform.localPosition = Vector3.zero;
                 obj.transform.Translate(Vector3.forward * distance * obj.transform.lossyScale.x);
                 obj.transform.localPosition += new Vector3(Random.Range(-spread, spread), 0, Random.Range(-spread, spread));
@@ -160,6 +186,8 @@ public class GameContent : MonoBehaviour {
 
     public void KillEnemy()
     {
+        sceneLoader.AddScore(100);
+        scoreText.text = "Score " + sceneLoader.roundScore;
         enemies--;
     }
 }

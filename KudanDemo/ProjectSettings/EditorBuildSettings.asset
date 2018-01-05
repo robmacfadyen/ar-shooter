@@ -5,10 +5,13 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
+  - enabled: 1
+    path: Assets/Scenes/PreTitle.unity
+    guid: 4539fcc7e5d5688419536bdfda54e071
+  - enabled: 1
     path: Assets/Scenes/Title.unity
     guid: b2e45ec4c1bfd404288736e3cf6bd719
-  - enabled: 0
+  - enabled: 1
     path: Assets/KudanAR/Samples/KudanSample.unity
     guid: 4a7f9b1564931324b8958c2cf553b965
   - enabled: 0
@@ -17,3 +20,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Mapbox/Examples/SlippyTerrain/Slippy.unity
     guid: efcdf81fdae9ef1478b04b31da5816d5
+  - enabled: 1
+    path: Assets/Scenes/EndGame.unity
+    guid: 8279115a029fb89499cbcfb4ab31f292

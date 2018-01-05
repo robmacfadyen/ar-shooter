@@ -46,8 +46,10 @@ public class PlaceSpawners : MonoBehaviour
 
     public void StartClicked()
     {
+        //debugText.text += "clicked ";
         if (!_kudanTracker.ArbiTrackIsTracking())
         {
+            //debugText.text += "started tracking ";
             // from the floor placer.
             Vector3 floorPosition;          // The current position in 3D space of the floor
             Quaternion floorOrientation;    // The current orientation of the floor in 3D space, relative to the device
@@ -57,6 +59,11 @@ public class PlaceSpawners : MonoBehaviour
             spawnersPlaced++;
 
             gameContent.Init();
+        }
+
+        else
+        {
+            //debugText.text += "already tracking ";
         }
 
         //else
@@ -70,6 +77,7 @@ public class PlaceSpawners : MonoBehaviour
         if (_kudanTracker.ArbiTrackIsTracking())
         {
             _kudanTracker.ArbiTrackStop();
+            //debugText.text += "killed spawner ";
             // buttonText.text = spawnersKilled.ToString();
         }
     }
@@ -90,8 +98,10 @@ public class PlaceSpawners : MonoBehaviour
 
     private void Start()
     {
+        _kudanTracker._startOnEnable = true;
         _kudanTracker.ChangeTrackingMethod(_markerlessTracking);
         state = GameState.READY;
+        //debugText.text += "started ";
         //Invoke("PlaceSpawner", 5);
     }
 
@@ -119,23 +129,29 @@ public class PlaceSpawners : MonoBehaviour
             state = GameState.PLAYING;
         }
 
-        debugText.text = state.ToString();
+        //debugText.text = state.ToString();
     }
 
     public void Win()
     {
         state = GameState.WON;
         _kudanTracker.ArbiTrackStop();
+        //debugText.text += "won ";
         winScreen.SetActive(true);
         Time.timeScale = 0;
+        SceneLoader sceneLoader = GameObject.Find("SceneController").GetComponent<SceneLoader>();
+        sceneLoader.EndGame(sceneLoader.roundScore, true);
     }
 
     public void Lose()
     {
         state = GameState.LOST;
         _kudanTracker.ArbiTrackStop();
+        //debugText.text += "lost ";
         loseScreen.SetActive(true);
         Time.timeScale = 0;
+        SceneLoader sceneLoader = GameObject.Find("SceneController").GetComponent<SceneLoader>();
+        sceneLoader.EndGame(sceneLoader.roundScore, true);
     }
 
     //private void checkIfSpawnerIsDead()

@@ -13,10 +13,13 @@ ModelImporter:
     400004: Wall
     2300000: Tower
     2300002: Wall
+    2300004: //RootNode
     3300000: Tower
     3300002: Wall
+    3300004: //RootNode
     4300000: Tower
     4300002: Wall
+    4300004: barrier
     9500000: //RootNode
   materials:
     importMaterials: 1
