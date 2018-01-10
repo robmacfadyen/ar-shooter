@@ -14,7 +14,7 @@ public class SceneLoader : MonoBehaviour {
 
     public List<Base> bases = new List<Base>();
 
-    public struct Base
+    public class Base
     {
         public float lat;
         public float lon;
@@ -62,7 +62,7 @@ public class SceneLoader : MonoBehaviour {
 
         for (int i = 0; i < bases.Count; i++)
         {
-            Debug.Log(bases[i].DistanceTo(lat, lon));
+            //Debug.Log(bases[i].DistanceTo(lat, lon));
 
             if (bases[i].DistanceTo(lat, lon) < distance)
             {
@@ -76,12 +76,12 @@ public class SceneLoader : MonoBehaviour {
     {
             activeBase = bases.Count;
             bases.Add(new Base(lat,lon));
+            //Debug.Log("added base " + activeBase + " at level " + bases[activeBase].lvl);
     }
 
 	// Use this for initialization
 	void Awake () {
         DontDestroyOnLoad(gameObject);
-        Debug.Log(new Base(35.684045f, 139.774490f).DistanceTo(51.513377f, -0.088895f));
 
         //PlayerPrefs.SetFloat("lat0", 50.385121f);
         //PlayerPrefs.SetFloat("lon0", -4.156739f);
@@ -133,7 +133,6 @@ public class SceneLoader : MonoBehaviour {
     {
         GameObject.Find("PlayButton").GetComponent<Button>().onClick.RemoveAllListeners();
         GameObject.Find("PlayButton").GetComponent<Button>().onClick.AddListener(MainMenu);
-        Debug.Log("bound end");
     }
 
     public void StartGame()
@@ -163,10 +162,13 @@ public class SceneLoader : MonoBehaviour {
 
     public void EndGame(int score, bool win)
     {
+        Debug.Log("ended game");
         // remove last base if no points
         if (win)
         {
+            Debug.Log("base " + activeBase + " is level " + bases[activeBase].lvl);
             bases[activeBase].levelUp();
+            Debug.Log("leveled up base " + activeBase + " to level " + bases[activeBase].lvl);
         }
 
         result = win;
@@ -199,6 +201,7 @@ public class SceneLoader : MonoBehaviour {
         while (PlayerPrefs.HasKey("lat" + index))
         {
             bases.Add(new Base(PlayerPrefs.GetFloat("lat" + index), PlayerPrefs.GetFloat("lon" + index), PlayerPrefs.GetInt("lvl" + index)));
+            //Debug.Log("loaded base " + index + " at " + bases[index].lat + "," + bases[index].lon + " level " + bases[index].lvl);
             index++;
         }
     }
@@ -214,6 +217,11 @@ public class SceneLoader : MonoBehaviour {
                 PlayerPrefs.SetFloat("lat" + i, bases[i].lat);
                 PlayerPrefs.SetFloat("lon" + i, bases[i].lon);
                 PlayerPrefs.SetInt("lvl" + i, bases[i].lvl);
+                //Debug.Log("saved base " + i + " at " + bases[i].lat + "," + bases[i].lon + " level " + bases[i].lvl);
+            }
+            else
+            {
+                //Debug.Log("deleted base");
             }
         }
 

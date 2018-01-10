@@ -42,16 +42,19 @@ public class GameContent : MonoBehaviour {
 	// Use this for initialization
 	void OnEnable() {
         debugText.text += "Enabled";
+        Debug.Log("enabled");
         Init();
 	}
 
     public void Init()
     {
+        Debug.Log("init");
+        Debug.Log(active);
         scoreText.text = "Score 0";
 
         sceneLoader = GameObject.Find("SceneController").GetComponent<SceneLoader>();
         level = sceneLoader.bases[sceneLoader.activeBase].lvl;
-        debugText.text = level.ToString();
+        debugText.text += level.ToString();
 
         if (!active)
         {
@@ -60,7 +63,8 @@ public class GameContent : MonoBehaviour {
             SpawnCycle();
         }
 
-        Invoke("ForceWin", 1);
+        Debug.Log("forcing win in 3s");
+        //Invoke("ForceWin", 3);
     }
 
     //void OnDisable()
@@ -78,14 +82,15 @@ public class GameContent : MonoBehaviour {
         {
             if (objective.IsDead())
             {
+                Debug.Log("objective is dead");
                 CancelInvoke();
                 DestroyPlayField();
                 placeSpawners.Lose();
-                debugText.text = "Objective is dead";
             }
 
             if (objective.IsBuilt())
             {
+                Debug.Log("objective is built");
                 CancelInvoke();
                 DestroyPlayField();
                 placeSpawners.Win();
@@ -101,9 +106,10 @@ public class GameContent : MonoBehaviour {
 
     void ForceWin()
     {
+        Debug.Log("forcewin");
         CancelInvoke();
         DestroyPlayField();
-        placeSpawners.Win();
+        placeSpawners.Lose();
     }
 
     void SpawnCycle()
@@ -117,7 +123,7 @@ public class GameContent : MonoBehaviour {
 
     void CreatePlayField()
     {
-        objective.Build(800f, 1f + 30f * level);
+        objective.Build(800f, 1f + 90f * level);
 
         pool.CreatePool();
 
@@ -162,6 +168,7 @@ public class GameContent : MonoBehaviour {
 
     void DestroyPlayField()
     {
+        pool.DeletePool();
         active = false;
     }
 

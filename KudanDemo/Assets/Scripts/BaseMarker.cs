@@ -28,10 +28,10 @@ public class BaseMarker : MonoBehaviour {
 
         Vector2d worldPosition = Conversions.GeoToWorldPosition(lat, lon, map.CenterMercator, map.WorldRelativeScale);
 
-        Debug.Log(lat + "," + lon);
-        Debug.Log(map.WorldRelativeScale);
-        Debug.Log(map.CenterLatitudeLongitude.x + "," + map.CenterLatitudeLongitude.y);
-        Debug.Log(worldPosition.x + "," + worldPosition.y);
+        //Debug.Log(lat + "," + lon);
+        //Debug.Log(map.WorldRelativeScale);
+        //Debug.Log(map.CenterLatitudeLongitude.x + "," + map.CenterLatitudeLongitude.y);
+        //Debug.Log(worldPosition.x + "," + worldPosition.y);
 
         worldTransform = new Vector3((float)worldPosition.x, 0, (float)worldPosition.y);
     }

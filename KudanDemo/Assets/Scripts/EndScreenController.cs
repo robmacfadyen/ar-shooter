@@ -18,11 +18,11 @@ public class EndScreenController : MonoBehaviour {
 
         if (sceneLoader.result)
         {
-            text.text = "The base was defended\nTotal score ";
+            text.text = "The beacon has charged\nTotal score ";
         }
         else
         {
-            text.text = "The base was destroyed\nTotal score ";
+            text.text = "The beacon was destroyed\nTotal score ";
         }
         text.text += sceneLoader.allTimeScore;
 	}

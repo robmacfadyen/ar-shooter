@@ -37,6 +37,8 @@ namespace Mapbox.Examples
 					throw new System.Exception("You must have a reference camera assigned!");
 				}
 			}
+
+
 		}
 
 		void LateUpdate()

@@ -49,6 +49,7 @@ public class PlaceSpawners : MonoBehaviour
         //debugText.text += "clicked ";
         if (!_kudanTracker.ArbiTrackIsTracking())
         {
+            Debug.Log("start clicked");
             //debugText.text += "started tracking ";
             // from the floor placer.
             Vector3 floorPosition;          // The current position in 3D space of the floor
@@ -98,7 +99,8 @@ public class PlaceSpawners : MonoBehaviour
 
     private void Start()
     {
-        _kudanTracker._startOnEnable = true;
+        Debug.Log("Started tracking scene");
+        //_kudanTracker._startOnEnable = true;
         _kudanTracker.ChangeTrackingMethod(_markerlessTracking);
         state = GameState.READY;
         //debugText.text += "started ";
@@ -151,7 +153,7 @@ public class PlaceSpawners : MonoBehaviour
         loseScreen.SetActive(true);
         Time.timeScale = 0;
         SceneLoader sceneLoader = GameObject.Find("SceneController").GetComponent<SceneLoader>();
-        sceneLoader.EndGame(sceneLoader.roundScore, true);
+        sceneLoader.EndGame(sceneLoader.roundScore, false);
     }
 
     //private void checkIfSpawnerIsDead()

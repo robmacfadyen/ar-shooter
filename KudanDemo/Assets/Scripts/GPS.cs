@@ -41,11 +41,11 @@ public class GPS : MonoBehaviour
             baseMarkers[i].ShowBase(sceneLoader.bases[i].lat, sceneLoader.bases[i].lon, sceneLoader.bases[i].lvl);
         }
 
-        mapControl.ScrollToLatLon(50.385121f, -4.156739f);
+        mapControl.ScrollToLatLon(0f, -0f);
 
         sceneLoader.BindMap();
 
-        //loadingPanel.gameObject.SetActive(true);
+        loadingPanel.gameObject.SetActive(true);
 
         // First, check if user has location service enabled
         if (!Input.location.isEnabledByUser)
@@ -121,12 +121,12 @@ public class GPS : MonoBehaviour
         if (activeBase == -1)
         {
             sceneLoader.NewBase(Input.location.lastData.latitude, Input.location.lastData.longitude);
-            debugText.text = "No bases in your area\nTap PLAY to build a new base";
+            debugText.text = "No beacons in your area\nTap PLAY to charge a new beacon";
         }
         else
         {
             int activeLevel = sceneLoader.bases[activeBase].lvl;
-            debugText.text = "Level " + activeLevel + " base in your area\nTap PLAY to upgrade the base";
+            debugText.text = "Level " + activeLevel + " beacon in your area\nTap PLAY to upgrade the beacon";
         }
     }
 }
