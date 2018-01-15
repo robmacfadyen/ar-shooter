@@ -75,7 +75,7 @@ public class SceneLoader : MonoBehaviour {
     public void NewBase(float lat, float lon)
     {
             activeBase = bases.Count;
-            bases.Add(new Base(lat,lon));
+            bases.Add(new Base(lat,lon,1));
             //Debug.Log("added base " + activeBase + " at level " + bases[activeBase].lvl);
     }
 
